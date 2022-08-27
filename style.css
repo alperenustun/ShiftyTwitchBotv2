@@ -26,6 +26,16 @@ main{
     /* border: 1px solid green; */
     height: 50px;
     background: rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.navigation h3{
+    position: absolute;
+    top: 5px;
+    color: white;
+    font-size: 1.5em;
+    text-shadow: 0 0 5px white;
+    animation: navigationSlider 40s infinite, glitch-skew 3s infinite linear alternate-reverse;
 }
 
 article{
@@ -35,15 +45,27 @@ article{
     align-items: center;
 }
 
-.screen{
-    /* border: 1px solid yellow; */
+.screen-container{
     height: 100%;
     width: 70%;
+    padding: 0.5em 1em;
 }
 
+.screen{
+    height: 100%;
+    width: 100%;
+    border: 2px solid white;
+    box-shadow: 0 0 10px #0026d1;
+    border-radius: 10px;
+    animation: shineIt 3s infinite;
+}
+
+
+
 .chat-container{
-    /* border: 1px solid crimson; */
-    border: 5px dotted #dadada;
+    border: 2px solid white;
+    box-shadow: 0 0 10px white;
+    border-radius: 10px;
     height: 100%;
     width: 30%;
     padding: 0 2em;
@@ -62,7 +84,6 @@ article{
 }
 
 .chat__item{
-    /* border: 1px solid blue; */
     background-image: linear-gradient(to right top, #091833, #0a2240, #092d4d, #06385a, #004467);
     box-shadow: 0 0 20px #045680;
     margin-top: 1em;
@@ -75,5 +96,63 @@ article{
 .chat__item-message{
     margin-top: 1em;
     line-height: 1.4em;
+}
+
+
+@keyframes navigationSlider {
+    0%{
+        left: 0;
+    }
+    50%{
+        left: calc(100vw - 316px);
+    }
+    100%{
+        left: 0;
+    }
+}
+
+@keyframes shineIt {
+    0%{
+        box-shadow: 0 0 10px white;
+    }
+    50%{
+        box-shadow: 0 0 20px white;
+    }
+    100%{
+        box-shadow: 0 0 10px white;
+    }
+}
+
+@keyframes glitch-skew {
+    0% {
+        transform: skew(4deg);
+   }
+    10% {
+        transform: skew(-2deg);
+   }
+    20% {
+        transform: skew(4deg);
+   }
+    30% {
+        transform: skew(-3deg);
+   }
+    40% {
+        transform: skew(-4deg);
+   }
+    50% {
+        transform: skew(-2deg);
+   }
+    60% {
+        transform: skew(4deg);
+   }
+    70% {
+        transform: skew(0deg);
+   }
+    80% {
+        transform: skew(5deg);
+   }
+    90% {
+        transform: skew(5deg);
+   }
 }
 
