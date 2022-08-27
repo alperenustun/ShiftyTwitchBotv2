@@ -9,7 +9,7 @@ ComfyJS.onCommand = (user, command, message, flags, extra) => {
 ComfyJS.Init("shiftyshifterr");
 
 
-const chatElem = document.querySelector('.chat');
+const chatElem = document.querySelector('.chat-items');
 
 let chatUsers = [];
 
@@ -18,7 +18,15 @@ ComfyJS.onChat = (user, message, flags, self, extra) => {
     if(flags.broadcaster === true){
         newMessage = `
     <li class="chat__item">
-        <h3 class="chat__item-username">${user} <img width="32px" src="images/broadcaster.png" alt="broadcaster"></h3>
+        <h3 class="chat__item-username"><img style="width: 32px; margin-right: 15px" src="images/broadcaster.png" alt="broadcaster">${user}</h3>
+        <p class="chat__item-message">${message}</p>
+    </li>
+    `
+    }
+    else if(flags.mod === true){
+        newMessage = `
+    <li class="chat__item">
+        <h3 class="chat__item-username"><img style="width: 32px; margin-right: 15px" src="images/sword2.png" alt="moderator">${user}</h3>
         <p class="chat__item-message">${message}</p>
     </li>
     `
@@ -26,7 +34,7 @@ ComfyJS.onChat = (user, message, flags, self, extra) => {
     else{
         newMessage = `
     <li class="chat__item">
-        <h3 class="chat__item-username">${user}</h3>
+        <h3 class="chat__item-username"><img style="width: 32px; margin-right: 15px" src="images/humanoid.png" alt="moderator">${user}</h3>
         <p class="chat__item-message">${message}</p>
     </li>
     `
@@ -41,15 +49,6 @@ ComfyJS.onChat = (user, message, flags, self, extra) => {
     }
     
     chatElem.innerHTML = chatUsers;
-    // console.log(extra);
-
-    // if(chatUsers.find(element => element === user)){
-    //     console.log("this guy is already exists!");
-    // }
-    // else{
-    //     chatUsers.push(user);
-    // }
-    // secondUser.innerHTML = chatUsers;
 }
 
 

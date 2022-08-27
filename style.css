@@ -36,20 +36,21 @@ article{
 }
 
 .screen{
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     height: 100%;
     width: 70%;
 }
 
 .chat-container{
-    border: 1px solid crimson;
+    /* border: 1px solid crimson; */
+    border: 5px dotted #dadada;
     height: 100%;
     width: 30%;
     padding: 0 2em;
 }
 
 .chat{
-    
+    overflow: hidden;
     height: 100%;
 }
 
@@ -64,7 +65,7 @@ article{
     /* border: 1px solid blue; */
     background-image: linear-gradient(to right top, #091833, #0a2240, #092d4d, #06385a, #004467);
     box-shadow: 0 0 20px #045680;
-    margin-top: 2em;
+    margin-top: 1em;
     padding: 1em 1.2em;
     border-radius: 10px;
     color: white;
