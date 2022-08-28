@@ -1,18 +1,4 @@
-// let myUser = document.getElementById('user');
-// let secondUser = document.getElementById('secondUser');
-
-ComfyJS.onCommand = (user, command, message, flags, extra) => {
-    if (flags.broadcaster ) {
-        switch (command) {
-            case 'test':
-                console.log('test message');
-                break;
-            default:
-                console.log('default');
-                break;
-        }
-    }
-}
+const botTitle = document.getElementById('title');
 ComfyJS.Init("shiftyshifterr");
 
 
@@ -26,8 +12,25 @@ ComfyJS.onChat = (user, message, flags, self, extra) => {
     console.log(extra.userColor);
 }
 
+ComfyJS.onJoin = ( user, self, extra ) =>{
+    botTitle.innerHTML = `HELLO <span style="color: aqua;">${user}</span>`;
+    setTimeout(() => {
+        botTitle.innerHTML = `WELCOME TO <span style="color: aqua;">CYBERCITY</span>`;
+    }, 25000);
+}
 
-
+ComfyJS.onCommand = (user, command, message, flags, extra) => {
+    if (flags.broadcaster ) {
+        switch (command) {
+            case 'render':
+                renderUsers();
+                break;
+            default:
+                console.log('default');
+                break;
+        }
+    }
+}
 
 function chatMessager(flags, user, message, extra){
     let newMessage;
@@ -57,8 +60,8 @@ function chatMessager(flags, user, message, extra){
     }
     
     if(chatUsers.length > 5){
-        chatUsers.pop();
-        chatUsers.unshift(newMessage);
+        chatUsers.shift();
+        chatUsers.push(newMessage);
     }
     else{
         chatUsers.push(newMessage);
@@ -66,6 +69,35 @@ function chatMessager(flags, user, message, extra){
     
     chatElem.innerHTML = chatUsers;
 }
+
+async function getUsers() {
+    let url = 'newuserDB.json';
+    try {
+        let res = await fetch(url);
+        return await res.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function renderUsers() {
+    let users = await getUsers();
+    let html = '';
+    users.forEach(user => {
+        let htmlSegment = `<div class="user">
+                            <h2>${user.username} ${user.xp}</h2>
+                        </div>`;
+
+        html += htmlSegment;
+    });
+
+    let container = document.querySelector('.container');
+    container.innerHTML = html;
+}
+
+
+
+
 
 
 
