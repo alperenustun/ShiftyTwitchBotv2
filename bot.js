@@ -2,57 +2,58 @@ require('dotenv').config();
 const ComfyJS = require("comfy.js");
 const fs = require('fs');
 
-ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
+ComfyJS.onCommand = (user, command, message, flags, extra) => {
   switch (command) {
     case 'join':
-      ComfyJS.Say( `/me ${user} joined the database` );
-      saveData(characterAdd(user));
+      saveData(user);
       break;
     default:
+      ComfyJS.Say(user + ' böyle bir komut yok');
       break;
   }
 }
 
-ComfyJS.onJoin = ( user, self, extra ) => {
-    if(user === "artixkrieger"){
-      ComfyJS.Say("/announce Artix bot online!");
-    }
-    else{
-      ComfyJS.Say("Hoşgeldin " + user);
-    }
+ComfyJS.onJoin = (user, self, extra) => {
+  if (user === "artixkrieger") {
+    ComfyJS.Say("/announce Artix bot online!");
+  }
 }
 
-ComfyJS.Init( process.env.TWITCHUSER, process.env.OAUTH, "shiftyshifterr" );
+ComfyJS.Init(process.env.TWITCHUSER, process.env.OAUTH, "shiftyshifterr");
 
-const newUser = [
-]
+let newUser = secondFileRead();
 
-const saveData = (user) =>{
-  const finished = (error) =>{
-      if(error){
-          console.log(error);
-          return
-      }
+const saveData = (user) => {
+  const finished = (error) => {
+    if (error) {
+      console.log(error);
+      return
+    }
   }
 
-  const jsonData = JSON.stringify(user);
-  fs.writeFile('userDB.json', jsonData, finished);
+  let reader = secondFileRead();
+
+  let result = reader.find(item => item.username == user);
+  if (result === undefined) {
+    characterAdd(user);
+    const jsonData = JSON.stringify(newUser);
+    fs.writeFile('userDB.json', jsonData, finished);
+    ComfyJS.Say(`@${user} Cybercity'e hoşgeldin.`);
+  }
+  else {
+    console.log(result);
+    ComfyJS.Say(`@${user} sen zaten Cybercity'de varsın.`);
+  }
 }
 
-const readFile = () => {
+function secondFileRead() {
   let rawdata = fs.readFileSync('userDB.json');
   let data = JSON.parse(rawdata);
-  //console.log(data[0].username);
-
-  for(let i = 0; i < data.length; i++){
-    console.log(data[i].username);
-  }
+  return data;
 }
 
-readFile();
-
 function characterAdd(user) {
-  let userToAdd = {username: user, xp: 0, coin: 0}
+  let userToAdd = { username: user, xp: 0, coin: 0 }
   newUser.push(userToAdd);
   return newUser;
 }
