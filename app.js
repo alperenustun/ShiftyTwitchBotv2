@@ -2,8 +2,15 @@
 // let secondUser = document.getElementById('secondUser');
 
 ComfyJS.onCommand = (user, command, message, flags, extra) => {
-    if (flags.broadcaster && command === "test") {
-        console.log("!test was typed in chat");
+    if (flags.broadcaster ) {
+        switch (command) {
+            case 'test':
+                console.log('test message');
+                break;
+            default:
+                console.log('default');
+                break;
+        }
     }
 }
 ComfyJS.Init("shiftyshifterr");
