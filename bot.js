@@ -25,14 +25,6 @@ ComfyJS.onJoin = ( user, self, extra ) => {
 ComfyJS.Init( process.env.TWITCHUSER, process.env.OAUTH, "shiftyshifterr" );
 
 const newUser = [
-  {
-    username: 'Newly added boi',
-    xp: 33
-  },
-  {
-    username: 'secondly added gal',
-    xp: 498
-  }
 ]
 
 const saveData = (user) =>{
@@ -44,13 +36,23 @@ const saveData = (user) =>{
   }
 
   const jsonData = JSON.stringify(user);
-  fs.writeFile('newuserDB.json', jsonData, finished);
+  fs.writeFile('userDB.json', jsonData, finished);
 }
 
+const readFile = () => {
+  let rawdata = fs.readFileSync('userDB.json');
+  let data = JSON.parse(rawdata);
+  //console.log(data[0].username);
 
+  for(let i = 0; i < data.length; i++){
+    console.log(data[i].username);
+  }
+}
+
+readFile();
 
 function characterAdd(user) {
-  let userToAdd = {username: user, xp: 0}
+  let userToAdd = {username: user, xp: 0, coin: 0}
   newUser.push(userToAdd);
   return newUser;
 }

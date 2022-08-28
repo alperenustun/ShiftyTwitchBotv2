@@ -71,7 +71,7 @@ function chatMessager(flags, user, message, extra){
 }
 
 async function getUsers() {
-    let url = 'newuserDB.json';
+    let url = 'userDB.json';
     try {
         let res = await fetch(url);
         return await res.json();
