@@ -12,6 +12,7 @@
 
 body{
     font-family: CyberpunkFont;
+    background: #010008;
 }
 
 main{
@@ -48,7 +49,6 @@ article{
 .screen-container{
     height: 100%;
     width: 70%;
-    padding: 0.5em 1em;
 }
 
 .screen{
@@ -56,14 +56,12 @@ article{
     width: 100%;
     border: 2px solid white;
     box-shadow: 0 0 10px #0026d1;
-    border-radius: 10px;
     animation: shineIt 3s infinite;
 }
 
 .insert-coin{
     width: 100%;
     border: 2px solid white;
-    border-radius: 10px;
     height: 30%;
 }
 
@@ -101,6 +99,16 @@ article{
 .chat__item-message{
     margin-top: 1em;
     line-height: 1.4em;
+}
+
+
+.leaderboard{
+    margin-top: 5em;
+    padding: 10em;
+    background: url('images/cyberpunk2.gif');
+    background-size: cover;
+    background-position: center;
+    color: white;
 }
 
 

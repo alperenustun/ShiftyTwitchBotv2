@@ -91,7 +91,7 @@ async function renderUsers() {
         html += htmlSegment;
     });
 
-    let container = document.querySelector('.container');
+    let container = document.querySelector('.leaderboard');
     container.innerHTML = html;
 }
 
