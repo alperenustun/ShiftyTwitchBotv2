@@ -7,9 +7,20 @@ ComfyJS.onCommand = (user, command, message, flags, extra) => {
     case 'join':
       saveData(user);
       break;
-    default:
-      ComfyJS.Say(user + ' böyle bir komut yok');
+    case 'joinfight':
+      joinFighters(user);
       break;
+    default:
+      break;
+  }
+  if(flags.broadcaster === true){
+    switch (command) {
+      case 'clearfighters':
+        clearFighters();
+        break;
+      default:
+        break;
+    }
   }
 }
 
@@ -21,8 +32,39 @@ ComfyJS.onJoin = (user, self, extra) => {
 
 ComfyJS.Init(process.env.TWITCHUSER, process.env.OAUTH, "shiftyshifterr");
 
-let newUser = secondFileRead();
 
+
+let firstFighter = '';
+let secondFighter = '';
+
+
+function joinFighters(user){
+  if(firstFighter === ''){
+    firstFighter = user;
+    ComfyJS.Say('Birinci savaşçı: ' + firstFighter);
+    console.log(firstFighter);
+  }
+  else if(secondFighter === ''){
+    secondFighter = user;
+    ComfyJS.Say('İkinci savaşçı: ' + secondFighter);
+  }
+  else{
+    ComfyJS.Say('Bütün savaşçılar yerlerindeler, sıranı beklemelisin.');
+  }
+}
+
+function clearFighters(){
+  firstFighter = '';
+  secondFighter = '';
+  ComfyJS.Say('Şuan kimse sırada değil.');
+}
+
+
+
+/* KATILMA İLE ALAKALI */
+/* KATILMA İLE ALAKALI */
+/* KATILMA İLE ALAKALI */
+let newUser = secondFileRead();
 const saveData = (user) => {
   const finished = (error) => {
     if (error) {
