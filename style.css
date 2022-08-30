@@ -76,8 +76,21 @@ article{
 }
 
 .chat{
-    overflow: hidden;
+    overflow-y: scroll;
     height: 100%;
+}
+
+.chat::-webkit-scrollbar {
+    width: 20px; 
+ }
+
+.chat::-webkit-scrollbar-track {
+  background-color: black;
+}
+
+.chat::-webkit-scrollbar-thumb {
+  background: #4e4e4e;
+  border-radius: 25px;
 }
 
 .chat h2{
@@ -100,6 +113,7 @@ article{
 .chat__item-message{
     margin-top: 1em;
     line-height: 1.4em;
+    letter-spacing: 0.1em;
 }
 
 

@@ -10,6 +10,9 @@ ComfyJS.onCommand = (user, command, message, flags, extra) => {
     case 'joinfight':
       joinFighters(user);
       break;
+    case 'attack':
+      attack(user);
+      break;
     default:
       break;
   }
@@ -36,17 +39,42 @@ ComfyJS.Init(process.env.TWITCHUSER, process.env.OAUTH, "shiftyshifterr");
 
 let firstFighter = '';
 let secondFighter = '';
+let firstFighterHealth = 0;
+let secondFighterHealth = 0;
+let firstPlayerTurn = 0;
+let secondPlayerTurn = 0;
 
 
+
+function attack(user){
+  if(user === firstFighter && firstPlayerTurn === 1){
+    firstPlayerTurn--;
+    secondPlayerTurn++;
+    console.log('first player vurdu');
+  }
+  else if(user === secondFighter && secondPlayerTurn === 1){
+    firstPlayerTurn++;
+    secondPlayerTurn--;
+    console.log('second player vurdu');
+  }
+  else{
+    ComfyJS.Say(`@${user} senin sıran değil!`);
+  }
+}
+
+/********* JOINING THE FIGHT *******/
 function joinFighters(user){
   if(firstFighter === ''){
     firstFighter = user;
     ComfyJS.Say('Birinci savaşçı: ' + firstFighter);
+    firstFighterHealth = 100;
+    firstPlayerTurn = 1;
     console.log(firstFighter);
   }
   else if(secondFighter === ''){
     secondFighter = user;
     ComfyJS.Say('İkinci savaşçı: ' + secondFighter);
+    secondFighterHealth = 100;
   }
   else{
     ComfyJS.Say('Bütün savaşçılar yerlerindeler, sıranı beklemelisin.');
@@ -56,6 +84,8 @@ function joinFighters(user){
 function clearFighters(){
   firstFighter = '';
   secondFighter = '';
+  let firstFighterHealth = 0;
+  let secondFighterHealth = 0;
   ComfyJS.Say('Şuan kimse sırada değil.');
 }
 
