@@ -72,24 +72,25 @@ article{
     border-top-right-radius: 10px;
     height: 100%;
     width: 30%;
-    padding: 0 2em;
+    padding: 0 1em 0 2em;
 }
 
 .chat{
     overflow-y: scroll;
     height: 100%;
+    padding: 0 1em;
 }
 
 .chat::-webkit-scrollbar {
-    width: 20px; 
+    width: 10px; 
  }
 
 .chat::-webkit-scrollbar-track {
-  background-color: black;
+  background-color: #0a2240;
 }
 
 .chat::-webkit-scrollbar-thumb {
-  background: #4e4e4e;
+  background: #4b48ff;
   border-radius: 25px;
 }
 

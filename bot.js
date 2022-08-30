@@ -50,12 +50,20 @@ function attack(user){
   if(user === firstFighter && firstPlayerTurn === 1){
     firstPlayerTurn--;
     secondPlayerTurn++;
-    console.log('first player vurdu');
+    let randomDamage = Math.floor(Math.random() * 101);
+    secondFighterHealth -= randomDamage;
+    ComfyJS.Say(`${user} ${secondFighter}'a ${randomDamage} hasar vurdu
+    ${secondFighter}'ın canı: ${secondFighterHealth}`);
+    ifDead();
   }
   else if(user === secondFighter && secondPlayerTurn === 1){
     firstPlayerTurn++;
     secondPlayerTurn--;
-    console.log('second player vurdu');
+    let randomDamage = Math.floor(Math.random() * 101);
+    firstFighterHealth -= randomDamage;
+    ComfyJS.Say(`${user} ${firstFighter}'a ${randomDamage} hasar vurdu
+    ${firstFighter}'ın canı: ${firstFighterHealth}`);
+    ifDead();
   }
   else{
     ComfyJS.Say(`@${user} senin sıran değil!`);
@@ -81,12 +89,30 @@ function joinFighters(user){
   }
 }
 
+function ifDead(){
+  if(firstFighterHealth <= 0 && secondFighterHealth <= 0){
+    ComfyJS.Say(` iki taraf da kaybetti kazanan yok!`);
+    clearFighters();
+  }
+  else if(firstFighterHealth <= 0){
+    ComfyJS.Say(`${firstFighter} kaybetti! Kazanan ${secondFighter}`);
+    clearFighters();
+  }
+  else if(secondFighterHealth <= 0 ){
+    ComfyJS.Say(`${secondFighter} kaybetti! Kazanan ${firstFighter}`);
+    clearFighters();
+  }
+  else{
+    console.log('Kimse ölmedi savaş devam ediyor');
+  }
+}
+
 function clearFighters(){
   firstFighter = '';
   secondFighter = '';
-  let firstFighterHealth = 0;
-  let secondFighterHealth = 0;
-  ComfyJS.Say('Şuan kimse sırada değil.');
+  firstFighterHealth = 0;
+  secondFighterHealth = 0;
+  ComfyJS.Say('Savaşçılar yerlerindeler, şuan slotlar boş.');
 }
 
 
